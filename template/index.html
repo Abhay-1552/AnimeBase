@@ -133,50 +133,19 @@
 
 	<!-- Small News Card Section -->
 	<section id="smallNewsCard" class="container mt-5 animated fadeInUp">
-		<h2 class="mb-4">News</h2>
-		<div class="card-deck">
-			<div class="card">
-				<img src="https://via.placeholder.com/150" class="card-img-top" alt="News Image">
-				<div class="card-body">
-					<h5 class="card-title">News 1</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-						card's content.</p>
-				</div>
-			</div>
-			<div class="card">
-				<img src="https://via.placeholder.com/150" class="card-img-top" alt="News Image">
-				<div class="card-body">
-					<h5 class="card-title">News 2</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-						card's content.</p>
-				</div>
-			</div>
-			<div class="card">
-				<img src="https://via.placeholder.com/150" class="card-img-top" alt="News Image">
-				<div class="card-body">
-					<h5 class="card-title">News 3</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-						card's content.</p>
-				</div>
-			</div>
-			<div class="card">
-				<img src="https://via.placeholder.com/150" class="card-img-top" alt="News Image">
-				<div class="card-body">
-					<h5 class="card-title">News 4</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-						card's content.</p>
-				</div>
-			</div>
-			<div class="card">
-				<img src="https://via.placeholder.com/150" class="card-img-top" alt="News Image">
-				<div class="card-body">
-					<h5 class="card-title">News 5</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-						card's content.</p>
-				</div>
-			</div>
-		</div>
-	</section>
+        <h2 class="mb-4">News</h2>
+        <div class="card-deck">
+            {% for news_item in data %}
+                <div class="card">
+                    <img src="{{ news_item['image_url'] }}" class="card-img-top" alt="News Image">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ news_item.title }}</h6>
+						<p class="card-text">{{ news_item.date }} </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 
 	<!-- Where to Watch Section -->
 	<section id="watchSection" class="container mt-5 animated fadeInUp">

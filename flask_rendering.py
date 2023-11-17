@@ -1,12 +1,16 @@
 from flask import Flask, render_template, request
 import mongodb
+from news_scraping import News
 
 app = Flask(__name__, template_folder='template', static_folder='static')
+anime_app = News()
 
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    news_data = anime_app.anime_news()
+    print(news_data)
+    return render_template("index.html", data=news_data)
 
 
 @app.route("/retrieve_data")

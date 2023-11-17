@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-import time
+
 
 class News:
     def __init__(self):
@@ -8,7 +8,6 @@ class News:
         self.header = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
         }
-
         self.anime_storage = []
 
     def anime_news(self):
@@ -16,33 +15,34 @@ class News:
             response = requests.get(self.url, headers=self.header)
             response.raise_for_status()
 
-            time.sleep(2)
-
             soup = BeautifulSoup(response.content, 'html.parser')
 
             main_content = soup.find_all('div', {'class': 'news-unit clearfix rect'})
 
-            data = []
-
             for movie_card in main_content:
-                title_element = movie_card.find('p', {'class': 'title'})
-                news_title = title_element.find('a').get_text() if title_element else "N/A"
+                if len(self.anime_storage) == 5:
+                    break
+                else:
+                    title_element = movie_card.find('p', {'class': 'title'})
+                    news_title = title_element.find('a').get_text() if title_element else "N/A"
 
-                image_element = movie_card.find('a', {'class': 'image-link'})
-                thumbnail_image = image_element.find('img').get('src') if image_element else "N/A"
+                    image_element = movie_card.find('a', {'class': 'image-link'})
+                    thumbnail_image = image_element.find('img').get('src') if image_element else "N/A"
 
-                text_element = movie_card.find('div', {'class': 'text'})
-                news_content = text_element.text.strip() if text_element else "N/A"
+                    info_element = movie_card.find('p', {'class': 'info di-ib'})
+                    information = info_element.get_text() if info_element else "N/A"
 
-                data.append({
-                    "title": news_title,
-                    "image": thumbnail_image,
-                    "text": news_content,
-                })
+                    news_date = information.strip().split(" by")[0]
 
-                self.anime_storage.append(data)
-            print(data)
+                    data = {
+                        "image_url": thumbnail_image,
+                        "title": news_title,
+                        "date": news_date
+                    }
 
+                    self.anime_storage.append(data)
+
+            print(self.anime_storage)
             return self.anime_storage
 
         except requests.exceptions.RequestException as e:
