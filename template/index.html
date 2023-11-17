@@ -70,6 +70,13 @@
 		#watchSection .card {
 			width: 18rem;
 		}
+
+		.card-text {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			margin: 0.5rem;
+		}
 	</style>
 	<title>Anime World</title>
 </head>
@@ -131,22 +138,6 @@
 		</div>
 	</section>
 
-	<!-- Small News Card Section -->
-	<section id="smallNewsCard" class="container mt-5 animated fadeInUp">
-        <h2 class="mb-4">News</h2>
-        <div class="card-deck">
-            {% for news_item in data %}
-                <div class="card">
-                    <img src="{{ news_item['image_url'] }}" class="card-img-top" alt="News Image">
-                    <div class="card-body">
-                        <h6 class="card-title">{{ news_item.title }}</h6>
-						<p class="card-text">{{ news_item.date }} </p>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </section>
-
 	<!-- Where to Watch Section -->
 	<section id="watchSection" class="container mt-5 animated fadeInUp">
 		<h2 class="mb-4">Where to Start!</h2>
@@ -184,6 +175,25 @@
 					<h5 class="card-title"><a href="https://9animes.ph/" target="_blank">9anime</a></h5>
 				</div>
 			</div>
+		</div>
+	</section>
+
+	<!-- Small News Card Section -->
+	<section id="smallNewsCard" class="container mt-5 animated fadeInUp">
+		<h2 class="mb-4">News</h2>
+		<div class="card-deck" style="margin-bottom: 20px;">
+			{% for news_item in data %}
+			<div class="card">
+				<img src="{{ news_item['image_url'] }}" class="card-img-top" alt="News Image">
+				<div class="card-body">
+					<h6 class="card-title">{{ news_item.title }}</h6>
+					<p class="card-text">{{ news_item.date }} </p>
+				</div>
+			</div>
+			{% if loop.index % 5 == 0 %}
+		</div>
+		<div class="card-deck">{% endif %}
+			{% endfor %}
 		</div>
 	</section>
 

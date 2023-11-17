@@ -20,7 +20,7 @@ class News:
             main_content = soup.find_all('div', {'class': 'news-unit clearfix rect'})
 
             for movie_card in main_content:
-                if len(self.anime_storage) == 5:
+                if len(self.anime_storage) == 10:
                     break
                 else:
                     title_element = movie_card.find('p', {'class': 'title'})
