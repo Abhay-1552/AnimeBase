@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeBase</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #87C4FF;
+            font-family: 'Arial', sans-serif;
+            margin-bottom: 60px;
+        }
+
+        .navbar,
+        footer {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 600px;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        label {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        input.form-control {
+            margin-bottom: 15px;
+        }
+
+        button.btn-primary {
+            background-color: #007bff;
+            border: 1px solid #007bff;
+        }
+
+        button.btn-primary:hover {
+            background-color: #0056b3;
+            border: 1px solid #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" style="color: #ffffff;" href="test.html">My Website</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" style="color: #ffffff;" href="" onclick="showForm('animeForm')">Anime</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: #ffffff;" href="" onclick="showForm('movieForm')">Movies</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <!-- Anime Form -->
+        <form id="animeForm" onsubmit="submitForm(event, 'animeForm');">
+            <div class="form-group">
+                <label for="inputName">Name:</label>
+                <input type="text" class="form-control" id="inputName" placeholder="Enter name" required>
+            </div>
+            <div class="form-group">
+                <label for="inputEpisodes">Episodes:</label>
+                <input type="text" class="form-control" id="inputEpisodes" placeholder="Enter number of episodes"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="selectType">Select Type:</label>
+                <select class="form-control" id="selectType" required>
+                    <option value="season">Season</option>
+                    <option value="movie">Movie</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- Movie Form -->
+        <form id="movieForm" style="display: none;" onsubmit="submitForm(event, 'movieForm');">
+            <div class="form-group">
+                <label for="inputText">Enter Movie Text:</label>
+                <input type="text" class="form-control" id="inputText" placeholder="Enter movie text here" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 My Website. All rights reserved.</p>
+    </footer>
+
+    <!-- Link to Bootstrap JS and jQuery (You may need to adjust the paths) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function showForm(formId) {
+            // Hide all forms
+            document.querySelectorAll('form').forEach(function (form) {
+                form.style.display = 'none';
+            });
+
+            // Show the selected form
+            document.getElementById(formId).style.display = 'block';
+        }
+
+        function submitForm(event, formId) {
+            // Prevent default form submission
+            event.preventDefault();
+
+            // Clear form after submission
+            document.getElementById(formId).reset();
+        }
+    </script>
+</body>
+
+</html>

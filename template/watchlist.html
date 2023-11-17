@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>MongoDB Atlas Table</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2>MongoDB Atlas Table</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Episodes</th>
+                    <th scope="col">Type</th>
+                    <!-- Add more columns based on your MongoDB document structure -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data_type %}
+                <tr>
+                    <td>{{ item.Name }}</td>
+                    <td>{{ item.Episodes }}</td>
+                    <td>{{ item.Type }}</td>
+                    <!-- Add more cells based on your MongoDB document structure -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
