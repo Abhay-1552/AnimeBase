@@ -57,7 +57,7 @@ class Anime:
 
 
 if __name__ == "__main__":
-    connect = 'connect_url_from_mongodb'
+    connect = 'mongodb+srv://abhaypatel1552:abhaypatel1552@cluster0.gtolic6.mongodb.net/?retryWrites=true&w=majority'
 
     db = AnimeDB(connect)
     app = Anime(db)
