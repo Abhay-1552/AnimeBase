@@ -42,7 +42,6 @@ class News:
 
                     self.anime_storage.append(data)
 
-            print(self.anime_storage)
             return self.anime_storage
 
         except requests.exceptions.RequestException as e:

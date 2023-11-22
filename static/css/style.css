@@ -1,0 +1,122 @@
+body {
+    background-color: #2B2B28;
+}
+
+.navbar {
+    background-color: #343a40;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+    color: #ffffff;
+}
+
+.jumbotron {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+a:any-link {
+    color: #ffffff;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffdd95;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+section {
+    background-color: #4A4A48;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 40px;
+}
+
+#newsSlider .card,
+#watchSection .card {
+    margin: 0 10px;
+}
+
+.animated {
+    animation-fill-mode: both;
+}
+
+.fadeInUp {
+    animation-name: fadeInUp;
+    animation-duration: 2s;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer p {
+    margin-bottom: 0;
+}
+
+/* Card Design */
+#smallNewsCard .card,
+#watchSection .card {
+    width: 18rem;
+}
+
+.card-body {
+    padding: 0.5em;
+}
+
+.card-text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0.5rem;
+}
+
+.card-news {
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+}
+
+.card-anime {
+    background-color: #4A4A48;
+    opacity: 100;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-anime:hover {
+    transform: scale(1.05);
+}
+
+h2 {
+    color: #ffdd95;
+    font-family: Poppins, Arial;
+    font-weight: 600;
+    font-size: 22px !important;
+}
+
+.text-content,
+h5,
+h6 {
+    font-family: Poppins, Arial;
+    font-weight: 500;
+    font-size: 1em;
+    color: #ffffff;
+    text-decoration: none !important;
+    outline: 0;
+}
+
+.card-image {
+    border-radius: 10px 10px 0 0;
+    object-fit: fill;
+    height: auto;
+    width: auto;
+}

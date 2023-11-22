@@ -9,7 +9,6 @@ anime_app = News()
 @app.route("/")
 def index():
     news_data = anime_app.anime_news()
-    print(news_data)
     return render_template("index.html", data=news_data)
 
 
