@@ -72,11 +72,20 @@ class Anime:
 
             self.cur.execute(select_data_query)
 
+            fetch_data = []
+
             # Fetch all rows
             rows = self.cur.fetchall()
 
             for row in rows:
-                print(row)
+                data = {
+                    "AnimeName": row[0],
+                    "Episodes": row[1],
+                    "Type": row[2]
+                }
+                fetch_data.append(data)
+
+            return fetch_data
 
         except Exception as e:
             print("Error:", e)
@@ -86,20 +95,20 @@ class Anime:
             self.cur.close()
 
 
-if __name__ == '__main__':
-    # Replace this value with your CockroachDB connection URL
-    db_url = "postgresql://Abhay:Lo4jQy5LkBDj33DUzqf2tQ@cloudy-tang-7295.8nk.cockroachlabs.cloud:26257/AnimeBase?sslmode=verify-full"
-
-    anime_db = AnimeDB(db_url)
-
-    anime = Anime(anime_db.conn)
-
-    # Example: Insert data
-    # anime.insert_data(anime_db.conn, "Naruto", 220, "Shounen")
-
-    # Example: Retrieve and print data
-    anime.retrieve_data(anime_db.conn)
-
-    # Close cursor and connection
-    anime.close_cursor()
-    anime_db.close_connection()
+# if __name__ == '__main__':
+#     # Replace this value with your CockroachDB connection URL
+#     db_url = "postgresql://Abhay:Lo4jQy5LkBDj33DUzqf2tQ@cloudy-tang-7295.8nk.cockroachlabs.cloud:26257/AnimeBase?sslmode=verify-full"
+#
+#     anime_db = AnimeDB(db_url)
+#
+#     anime = Anime(anime_db.conn)
+#
+#     # Example: Insert data
+#     # anime.insert_data(anime_db.conn, "Naruto", 220, "Shounen")
+#
+#     # Example: Retrieve and print data
+#     anime.retrieve_data(anime_db.conn)
+#
+#     # Close cursor and connection
+#     anime.close_cursor()
+#     anime_db.close_connection()
