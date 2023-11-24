@@ -35,40 +35,51 @@ class Anime:
         # Create a cursor object to execute SQL queries
         self.cur = conn.cursor()
 
-        create_table_query = sql.SQL("""
-            CREATE TABLE IF NOT EXISTS {} (
-                id SERIAL PRIMARY KEY,
-                AnimeName VARCHAR(300) NOT NULL,
-                Episodes INT NOT NULL,
-                Type VARCHAR(10) NOT NULL
-            )
-        """).format(sql.Identifier("Anime"))
+        try:
+            create_table_query = sql.SQL("""
+                CREATE TABLE IF NOT EXISTS Anime (
+                    id SERIAL PRIMARY KEY,
+                    AnimeName VARCHAR(300) NOT NULL,
+                    Episodes INT NOT NULL,
+                    Type VARCHAR(10) NOT NULL
+                )
+            """)
 
-        self.cur.execute(create_table_query)
-        conn.commit()
+            self.cur.execute(create_table_query)
+            conn.commit()
+
+        except Exception as e:
+            print("Error:", e)
 
     def insert_data(self, conn, anime_name, episodes, anime_type):
         # Insert data into the table
-        insert_data_query = """
-            INSERT INTO Anime (AnimeName, Episodes, Type) VALUES (%s, %s, %s)
-        """
+        try:
+            insert_data_query = """
+                INSERT INTO Anime (AnimeName, Episodes, Type) VALUES (%s, %s, %s);
+            """
 
-        self.cur.execute(insert_data_query, (anime_name, episodes, anime_type))
-        conn.commit()
+            self.cur.execute(insert_data_query, (anime_name, episodes, anime_type))
+            conn.commit()
+
+        except Exception as e:
+            print("Error:", e)
 
     def retrieve_data(self, conn):
-        select_data_query = """
-            SELECT * FROM Anime
-        """
+        try:
+            select_data_query = """
+                SELECT AnimeName, Episodes, Type FROM Anime;
+            """
 
-        self.cur.execute(select_data_query)
+            self.cur.execute(select_data_query)
 
-        # Fetch all rows
-        rows = self.cur.fetchall()
+            # Fetch all rows
+            rows = self.cur.fetchall()
 
-        # Display the fetched data
-        for row in rows:
-            print(row)
+            for row in rows:
+                print(row)
+
+        except Exception as e:
+            print("Error:", e)
 
     def close_cursor(self):
         if hasattr(self, 'cur') and self.cur is not None:
@@ -84,9 +95,7 @@ if __name__ == '__main__':
     anime = Anime(anime_db.conn)
 
     # Example: Insert data
-    anime.insert_data(anime_db.conn, "Naruto", 220, "Shounen")
-    anime.insert_data(anime_db.conn, "One Piece", 1000, "Shounen")
-    anime.insert_data(anime_db.conn, "Death Note", 37, "Mystery")
+    # anime.insert_data(anime_db.conn, "Naruto", 220, "Shounen")
 
     # Example: Retrieve and print data
     anime.retrieve_data(anime_db.conn)
