@@ -10,8 +10,16 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
         body {
             background-color: #2B2B28;
+            display: flex;
+            flex-direction: column;
         }
 
         .navbar {
@@ -19,7 +27,7 @@
             color: white;
         }
 
-        .footer {
+        footer {
             background-color: #242323;
             color: white;
             padding: 10px 0;
@@ -30,6 +38,7 @@
         .container {
             flex: 1;
             margin-top: 50px;
+            width: 700px;
         }
 
         .card {
@@ -41,10 +50,6 @@
 
         #Episodes[disabled] {
             cursor: not-allowed;
-        }
-
-        .container {
-            width: 700px;
         }
 
         label {
@@ -81,7 +86,7 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <form>
+                <form method="post" action="{{ url_for('form_data') }}" onsubmit="showPopup()">
                     <div class="form-group">
                         <label for="firstName">Anime Name:</label>
                         <input type="text" class="form-control" id="AnimeName" placeholder="Enter Anime name" required>
@@ -105,7 +110,7 @@
         </div>
     </div>
 
-    <footer class="footer mt-5">
+    <footer class="mt-5">
         <p>&copy; 2023 AnimeBase. All rights reserved.</p>
     </footer>
 
@@ -121,6 +126,23 @@
             // Enable the third field only if Option A is selected
             thirdField.disabled = (selectedOption !== "optionA");
         }
+
+        function showPopup() {
+            var anime_name = document.getElementById('AnimeName').value;
+            var anime_type = document.getElementById('Types').value;
+            var anime_episodes = null;
+
+            if (anime_type == 'OptionB') {
+                anime_episodes = 1;
+            } else {
+                anime_episodes = document.getElementById('Episodes').value;
+            }
+
+            alert("Data Saved: " + anime_name + ", " + anime_type + " saved with " + anime_episodes + " episodes.");
+
+            return true;
+        }
+
     </script>
 
 </body>

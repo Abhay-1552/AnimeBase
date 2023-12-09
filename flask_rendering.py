@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from cockroachdb import Anime, AnimeDB
 from news_scraping import News
 
@@ -24,15 +24,28 @@ def retrieve_data():
     return render_template('watchlist.html', data_types=data_type)
 
 
-@app.route("/display", methods=["GET", "POST"])
+@app.route("/display")
 def display():
-    if request.method == "POST":
-        anime_name = request.form.get('AnimeName')
-        anime_type = request.form.get('Types')
-        anime_episode = request.form.get('Episodes')
-        return f"Form submitted with Username"
-
     return render_template('anime.html')
+
+
+@app.route("/form_data", methods=["POST"])
+def form_data():
+    if request.method == 'POST':
+        anime_name = request.form.get('AnimeName')
+        option_selected = request.form.get('Types')
+        episodes = request.form.get('Episodes') if option_selected == 'optionA' else None
+
+        # Process the form data (you can save it to a database or perform other actions)
+        # For now, let's just print the data
+        print(f"Anime Name: {anime_name}")
+        print(f"Option Selected: {option_selected}")
+        print(f"Episodes: {episodes}")
+
+        # Redirect back to the same page to display the form data
+        return redirect(url_for('display'))
+
+    return '', 204
 
 
 if __name__ == '__main__':
