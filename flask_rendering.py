@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from cockroachdb import Anime, AnimeDB
 from news_scraping import News
 
@@ -24,11 +24,15 @@ def retrieve_data():
     return render_template('watchlist.html', data_types=data_type)
 
 
-# @app.route("/display", methods=["POST"])
-# def display():
-#     if request.method == "POST":
-#         data_select = request.form.get('category')
-#         return render_template('output.html', data=data_select)
+@app.route("/display", methods=["GET", "POST"])
+def display():
+    if request.method == "POST":
+        anime_name = request.form.get('AnimeName')
+        anime_type = request.form.get('Types')
+        anime_episode = request.form.get('Episodes')
+        return f"Form submitted with Username"
+
+    return render_template('anime.html')
 
 
 if __name__ == '__main__':
