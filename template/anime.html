@@ -89,19 +89,19 @@
                 <form method="post" action="{{ url_for('form_data') }}" onsubmit="showPopup()">
                     <div class="form-group">
                         <label for="firstName">Anime Name:</label>
-                        <input type="text" class="form-control" id="AnimeName" placeholder="Enter Anime name" required>
+                        <input type="text" class="form-control" id="AnimeName" name="AnimeName" placeholder="Enter Anime name" required>
                     </div>
                     <div class="form-group">
                         <label for="options">Choose an option:</label>
-                        <select class="form-control" id="Types" onchange="toggleThirdField()" required>
+                        <select class="form-control" id="Types" name="Types" onchange="toggleThirdField()" required>
                             <option default>--Select--</option>
-                            <option value="optionA">ONA</option>
-                            <option value="optionB">Movie</option>
+                            <option value="ONA">ONA</option>
+                            <option value="Movie">Movie</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="thirdField">Episodes (If ONA):</label>
-                        <input type="number" class="form-control" id="Episodes" placeholder="Enter an integer"
+                        <input type="number" class="form-control" id="Episodes" name="Episodes" placeholder="Enter an integer"
                             oninput="this.value = Math.abs(this.value)" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -124,7 +124,7 @@
             var thirdField = document.getElementById("Episodes");
 
             // Enable the third field only if Option A is selected
-            thirdField.disabled = (selectedOption !== "optionA");
+            thirdField.disabled = (selectedOption !== "ONA");
         }
 
         function showPopup() {
@@ -132,7 +132,7 @@
             var anime_type = document.getElementById('Types').value;
             var anime_episodes = null;
 
-            if (anime_type == 'OptionB') {
+            if (anime_type == 'Movie') {
                 anime_episodes = 1;
             } else {
                 anime_episodes = document.getElementById('Episodes').value;
