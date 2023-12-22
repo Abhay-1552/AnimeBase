@@ -1,111 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>AnimeBase</title>
-    <link rel="icon" type="image/x-icon" href="../static/images/otaku-icon.ico">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="../static/css/style_watchlist.css">
-
+    <title>Hello</title>
     <style>
-        section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
-        }
-
         .card {
-            border: 1px solid #000;
-            border-radius: 8px;
-            overflow: wrap;
-            margin: 10px;
-            width: 45%;
-            background-color: #343a40;
-            /* Adjust the width as needed */
-        }
-
-        .card img {
-            width: 100%;
-            height: auto;
+            display: inline-block;
+            width: 400px;
+            margin-bottom: 20px;
         }
 
         .card-content {
             padding: 10px;
-            text-align: center;
         }
 
-        h2 {
-            color: #ffdd95;
-            font-weight: 700;
-            font-size: larger;
-        }
-
-        p {
-            color: #fff;
-            font-weight: 500;
-            font-size: medium;
-        }
-
-        a:hover {
-            text-decoration: none;
+        .card img {
+            float: left;
+            width: 200px;
+            height: 150px;
+            margin-right: 10px;
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark animated fadeInUp">
-        <a class="navbar-brand">
-            <img src="../static/images/otaku.png" alt="Icon" style="margin-right: 5px;">
-            AnimeBase
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('display') }}">Anime</a>
-                </li>
-            </ul>
+    <div class="card">
+        <img src="image.jpg" alt="Image">
+        <div class="card-content">
+            <h3>Title</h3>
+            <p>Description</p>
         </div>
-    </nav>
+    </div>
 
-    <section class="mt-5">
-        <div class="title text-center">
-            <h3>MyAnimeCollection</h3>
+    <div class="card">
+        <img src="image.jpg" alt="Image">
+        <div class="card-content">
+            <h3>Title</h3>
+            <p>Description</p>
         </div>
-    </section>
-
-    <section>
-        {% for item in data_types %}
-        <div class="card">
-            <img src="{{ item.Image }}" alt="Card Image 1">
-            <div class="card-content">
-                <h2>{{ item.AnimeName }}</h2>
-                <p>{{ item.Type}}, {{ item.Episodes}} Episodes</p>
-                <a href="{{ item.Content }}">Read More</a>
-            </div>
-        </div>
-        {% endfor %}
-    </section>
-
-    <footer class="mt-5">
-        <p>&copy; 2023 Anime World. All rights reserved.</p>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </div>
 
 </body>
 

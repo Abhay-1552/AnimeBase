@@ -35,32 +35,6 @@ footer {
     }
 }
 
-table {
-    width: 80%;
-    border-collapse: collapse;
-    margin: 20px auto;
-}
-
-th,
-td {
-    padding: 15px;
-    border: 1px solid #444;
-    text-align: center;
-}
-
-th {
-    background-color: #555;
-    color: #ffffff;
-    font-weight: 600;
-    font-size: larger;
-}
-
-td {
-    color: #ffdd95;
-    font-weight: 500;
-    font-size: medium;
-}
-
 .title {
     color: #ffffff;
 }

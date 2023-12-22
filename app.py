@@ -42,7 +42,6 @@ def form_data():
                                    anime_type=option_selected)
 
         return redirect(url_for('display'))
-
     return '', 204
 
 

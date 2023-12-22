@@ -30,8 +30,8 @@
         }
 
         .card img {
-            width: 100px;
-            height: 150px;
+            width: 150px;
+            height: 200px;
             border-radius: 8px 0px 0px 8px;
         }
 
@@ -88,12 +88,12 @@
 
     <section>
         {% for item in data_types %}
-        <div class="card container ">
+        <div class="card">
             <div class="row">
                 <div>
                     <img src="{{ item.Image }}" alt="Card Image 1">
                 </div>
-                <div class="card-content align-items-center">
+                <div class="card-content">
                     <h2>{{ item.AnimeName }}</h2>
                     <p>{{ item.Type}}, {{ item.Episodes }} Episodes</p>
                     <a href="{{ item.Content }}">Read More</a>
