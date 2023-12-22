@@ -87,33 +87,16 @@
     </section>
 
     <section>
+        {% for item in data_types %}
         <div class="card">
-            <img src="your-image-url1.jpg" alt="Card Image 1">
+            <img src="{{ item.Image }}" alt="Card Image 1">
             <div class="card-content">
-                <h2>Card Title 1</h2>
-                <p>Subtitle 1</p>
-                <a href="#">Read More</a>
+                <h2>{{ item.AnimeName }}</h2>
+                <p>{{ item.Type}}, {{ item.Episodes}} Episodes</p>
+                <a href="{{ item.Content }}">Read More</a>
             </div>
         </div>
-
-        <div class="card">
-            <img src="your-image-url2.jpg" alt="Card Image 2">
-            <div class="card-content">
-                <h2>Card Title 2</h2>
-                <p>Subtitle 2</p>
-                <a href="#">Read More</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="your-image-url2.jpg" alt="Card Image 2">
-            <div class="card-content">
-                <h2>Card Title 2</h2>
-                <p>Subtitle 2</p>
-                <a href="#">Read More</a>
-            </div>
-        </div>
-
+        {% endfor %}
     </section>
 
     <footer class="mt-5">

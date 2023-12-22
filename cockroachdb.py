@@ -2,6 +2,7 @@ import psycopg2
 from psycopg2 import sql
 from urllib.parse import urlparse
 from psycopg2 import extensions
+from content_scraping import Info
 
 
 class AnimeDB:
@@ -41,7 +42,9 @@ class Anime:
                     id SERIAL PRIMARY KEY,
                     AnimeName VARCHAR(300) NOT NULL,
                     Episodes INT NOT NULL,
-                    Type VARCHAR(10) NOT NULL
+                    Type VARCHAR(10) NOT NULL,
+                    Image VARCHAR(600) NOT NULL,
+                    Content VARCHAR(600) NOT NULL
                 )
             """)
 
@@ -54,11 +57,15 @@ class Anime:
     def insert_data(self, conn, anime_name, episodes, anime_type):
         # Insert data into the table
         try:
+            url_name = str(anime_name).replace(' ', '_')
+            app = Info(url_name)
+            content_link, image_link = app.anime_info()
+
             insert_data_query = """
-                INSERT INTO Anime (AnimeName, Episodes, Type) VALUES (%s, %s, %s);
+                INSERT INTO Anime (AnimeName, Episodes, Type, Image, Content) VALUES (%s, %s, %s, %s, %s);
             """
 
-            self.cur.execute(insert_data_query, (anime_name, episodes, anime_type))
+            self.cur.execute(insert_data_query, (anime_name, episodes, anime_type, image_link, content_link))
             conn.commit()
 
         except Exception as e:
@@ -67,7 +74,7 @@ class Anime:
     def retrieve_data(self):
         try:
             select_data_query = """
-                SELECT AnimeName, Episodes, Type FROM Anime ORDER BY AnimeName ASC;
+                SELECT AnimeName, Episodes, Type, Image, Content FROM Anime ORDER BY AnimeName ASC;
             """
 
             self.cur.execute(select_data_query)
@@ -81,7 +88,9 @@ class Anime:
                 data = {
                     "AnimeName": row[0],
                     "Episodes": row[1],
-                    "Type": row[2]
+                    "Type": row[2],
+                    "Image": row[3],
+                    "Content": row[4]
                 }
                 fetch_data.append(data)
 
