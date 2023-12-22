@@ -62,12 +62,12 @@ class Anime:
             conn.commit()
 
         except Exception as e:
-            print("Error:", e)
+            return f"Error: {e}"
 
-    def retrieve_data(self, conn):
+    def retrieve_data(self):
         try:
             select_data_query = """
-                SELECT AnimeName, Episodes, Type FROM Anime;
+                SELECT AnimeName, Episodes, Type FROM Anime ORDER BY AnimeName ASC;
             """
 
             self.cur.execute(select_data_query)
@@ -88,27 +88,8 @@ class Anime:
             return fetch_data
 
         except Exception as e:
-            print("Error:", e)
+            return f"Error: {e}"
 
     def close_cursor(self):
         if hasattr(self, 'cur') and self.cur is not None:
             self.cur.close()
-
-
-# if __name__ == '__main__':
-#     # Replace this value with your CockroachDB connection URL
-#     db_url = "postgresql://Abhay:Lo4jQy5LkBDj33DUzqf2tQ@cloudy-tang-7295.8nk.cockroachlabs.cloud:26257/AnimeBase?sslmode=verify-full"
-#
-#     anime_db = AnimeDB(db_url)
-#
-#     anime = Anime(anime_db.conn)
-#
-#     # Example: Insert data
-#     # anime.insert_data(anime_db.conn, "Naruto", 220, "Shounen")
-#
-#     # Example: Retrieve and print data
-#     anime.retrieve_data(anime_db.conn)
-#
-#     # Close cursor and connection
-#     anime.close_cursor()
-#     anime_db.close_connection()

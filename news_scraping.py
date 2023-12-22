@@ -47,8 +47,3 @@ class News:
         except requests.exceptions.RequestException as e:
             print("Error fetching content:", e)
             return "Error fetching data."
-
-
-if __name__ == '__main__':
-    app = News()
-    app.anime_news()

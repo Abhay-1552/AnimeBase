@@ -3,9 +3,11 @@ from cockroachdb import Anime, AnimeDB
 from news_scraping import News
 
 app = Flask(__name__, template_folder='template', static_folder='static')
+
+# Anime news instance
 anime_app = News()
 
-
+# Anime database Instance
 db_url = "postgresql://Abhay:Lo4jQy5LkBDj33DUzqf2tQ@cloudy-tang-7295.8nk.cockroachlabs.cloud:26257/AnimeBase?sslmode=verify-full"
 
 anime_db = AnimeDB(db_url)
@@ -20,7 +22,7 @@ def index():
 
 @app.route("/retrieve_data")
 def retrieve_data():
-    data_type = anime_instance.retrieve_data(anime_db.conn)
+    data_type = anime_instance.retrieve_data()
     return render_template('watchlist.html', data_types=data_type)
 
 

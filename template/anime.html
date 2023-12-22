@@ -58,6 +58,10 @@
             font-weight: 400;
             font-size: 16px !important;
         }
+
+        .title {
+            color: #ffffff;
+        }
     </style>
 </head>
 
@@ -83,13 +87,20 @@
         </div>
     </nav>
 
+    <section class="mt-5">
+        <div class="title text-center">
+            <h3>Otaku Series Tracker</h3>
+        </div>
+    </section>
+
     <div class="container">
         <div class="card">
             <div class="card-body">
                 <form method="post" action="{{ url_for('form_data') }}" onsubmit="showPopup()">
                     <div class="form-group">
                         <label for="firstName">Anime Name:</label>
-                        <input type="text" class="form-control" id="AnimeName" name="AnimeName" placeholder="Enter Anime name" required>
+                        <input type="text" class="form-control" id="AnimeName" name="AnimeName"
+                            placeholder="Enter Anime name" required>
                     </div>
                     <div class="form-group">
                         <label for="options">Choose an option:</label>
@@ -101,8 +112,8 @@
                     </div>
                     <div class="form-group">
                         <label for="thirdField">Episodes (If ONA):</label>
-                        <input type="number" class="form-control" id="Episodes" name="Episodes" placeholder="Enter an integer"
-                            oninput="this.value = Math.abs(this.value)" required>
+                        <input type="number" class="form-control" id="Episodes" name="Episodes"
+                            placeholder="Enter an integer" oninput="this.value = Math.abs(this.value)" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
