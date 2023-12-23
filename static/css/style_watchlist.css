@@ -46,3 +46,46 @@ footer {
     cursor: pointer;
     outline: none;
 }
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.card {
+    border: 1px solid #000;
+    border-radius: 8px;
+    overflow: wrap;
+    margin: 10px;
+    width: 45%;
+    background-color: #343a40;
+}
+
+.card img {
+    width: 150px;
+    height: 200px;
+    border-radius: 8px 0px 0px 8px;
+}
+
+.card-content {
+    padding: 10px;
+    text-align: center;
+}
+
+h2 {
+    color: #ffdd95;
+    font-weight: 700;
+    font-size: larger;
+}
+
+p {
+    color: #fff;
+    font-weight: 500;
+    font-size: medium;
+}
+
+a:hover {
+    text-decoration: none;
+}

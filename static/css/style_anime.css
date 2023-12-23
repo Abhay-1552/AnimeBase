@@ -11,16 +11,19 @@ body {
 }
 
 .navbar {
-    background-color: #242323;
+    background-color: #343a40;
     color: white;
 }
 
 footer {
-    background-color: #242323;
-    color: white;
+    background-color: #343a40;
+    color: #ffffff;
     padding: 10px 0;
     text-align: center;
-    margin-top: auto;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
 .container {
@@ -43,8 +46,8 @@ footer {
 label {
     color: #ffdd95;
     font-family: Poppins, Arial;
-    font-weight: 400;
-    font-size: 16px !important;
+    font-weight: 500;
+    font-size: 18px !important;
 }
 
 .title {

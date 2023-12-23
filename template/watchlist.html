@@ -11,51 +11,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="../static/css/style_watchlist.css">
-
-    <style>
-        section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
-        }
-
-        .card {
-            border: 1px solid #000;
-            border-radius: 8px;
-            overflow: wrap;
-            margin: 10px;
-            width: 45%;
-            background-color: #343a40;
-        }
-
-        .card img {
-            width: 150px;
-            height: 200px;
-            border-radius: 8px 0px 0px 8px;
-        }
-
-        .card-content {
-            padding: 10px;
-            text-align: center;
-        }
-
-        h2 {
-            color: #ffdd95;
-            font-weight: 700;
-            font-size: larger;
-        }
-
-        p {
-            color: #fff;
-            font-weight: 500;
-            font-size: medium;
-        }
-
-        a:hover {
-            text-decoration: none;
-        }
-    </style>
 </head>
 
 <body>
@@ -88,15 +43,18 @@
 
     <section>
         {% for item in data_types %}
-        <div class="card">
-            <div class="row">
-                <div>
-                    <img src="{{ item.Image }}" alt="Card Image 1">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="{{ item.Image }}" class="card-img" alt="...">
                 </div>
-                <div class="card-content">
-                    <h2>{{ item.AnimeName }}</h2>
-                    <p>{{ item.Type}}, {{ item.Episodes }} Episodes</p>
-                    <a href="{{ item.Content }}">Read More</a>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ item.AnimeName }}</h2>
+                        <p class="card-text">{{ item.Type }}, {{ item.Episodes }} Episodes</p>
+                        <p class="card-text"><small><a href="{{ item.Content }}" target="_blank">Read
+                                    more...</a></small></p>
+                    </div>
                 </div>
             </div>
         </div>
