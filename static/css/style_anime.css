@@ -1,13 +1,12 @@
 html,
 body {
+    background-color: #2B2B28;
     height: 100%;
     margin: 0;
-}
-
-body {
-    background-color: #2B2B28;
+    padding: 0;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 .navbar {
@@ -52,4 +51,37 @@ label {
 
 .title {
     color: #ffffff;
+}
+
+.circle-container {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.circle-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.message-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.circle-container:hover .message-box {
+    opacity: 1;
 }
