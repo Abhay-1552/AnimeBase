@@ -11,6 +11,45 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="../static/css/style_watchlist.css">
+
+    <style>
+        .form-control {
+            width: 500px;
+        }
+
+        .circle-container {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        .circle-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .message-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .circle-container:hover .message-box {
+            opacity: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,7 +68,7 @@
                     <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('display') }}">Anime</a>
+                    <a class="nav-link" href="#">Anime</a>
                 </li>
             </ul>
         </div>
@@ -37,7 +76,32 @@
 
     <section class="mt-5">
         <div class="title text-center">
-            <h3>MyAnimeCollection</h3>
+            <h1
+                style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                SENPAI'S SANCTUARY</h1>
+        </div>
+    </section>
+
+    <section>
+        <div>
+            <form method="post" action="{{ url_for('form_data') }}" onsubmit="showPopup()">
+                <div class="form-row align-items-center">
+                    <div class="col-auto">
+                        <label class="sr-only" for="inputName">Name:</label>
+                        <input type="text" class="form-control mb-2" id="inputName" name="inputName"
+                            placeholder="Add Animes" required>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="circle-container">
+            <a href="https://myanimelist.net/" target="_blank">
+                <img class="circle-image" src="../static/images/mal.png" alt="Circle Image">
+            </a>
+            <div class="message-box">MyAnimeList</div>
         </div>
     </section>
 
@@ -50,8 +114,8 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h2 class="card-title">{{ item.AnimeName }}</h2>
-                        <p class="card-text">{{ item.Type }}, {{ item.Episodes }} Episodes</p>
+                        <h2 class="card-title">{{ item.English_Title }}</h2>
+                        <p class="card-text">{{ item.Anime_Type }}, {{ item.Episodes }} Episodes</p>
                         <p class="card-text"><small><a href="{{ item.Content }}" target="_blank">Read
                                     more...</a></small></p>
                     </div>
@@ -68,6 +132,16 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function showPopup() {
+            var anime_name = document.getElementById('inputName').value;
+
+            alert("Data Saved: Anime name " + anime_name + " added to your watchlist.");
+
+            return true;
+        }
+    </script>
 
 </body>
 

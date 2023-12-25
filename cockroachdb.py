@@ -39,14 +39,18 @@ class Anime:
 
         try:
             create_table_query = sql.SQL("""
-                CREATE TABLE IF NOT EXISTS Anime (
-                    id SERIAL PRIMARY KEY,
-                    AnimeName VARCHAR(300) NOT NULL,
-                    Episodes INT NOT NULL,
-                    Type VARCHAR(10) NOT NULL,
-                    Image VARCHAR(600) NOT NULL,
-                    Content VARCHAR(600) NOT NULL
-                )
+                CREATE TABLE IF NOT EXISTS public.mal_data (
+                    mal_id INT8 NOT NULL,
+                    english_title VARCHAR(300) NOT NULL,
+                    japanese_title VARCHAR(300) NOT NULL,
+                    episodes INT8 NOT NULL,
+                    type VARCHAR(10) NOT NULL,
+                    image_url VARCHAR(600) NOT NULL,
+                    page_url VARCHAR(600) NOT NULL,
+                    synopsis VARCHAR(2500) NULL,
+                    score INT8 NULL,
+                    CONSTRAINT mal_data_pkey PRIMARY KEY (mal_id ASC)
+                );
             """)
 
             self.cur.execute(create_table_query)
@@ -55,18 +59,22 @@ class Anime:
         except Exception as e:
             print("Error:", e)
 
-    def insert_data(self, conn, anime_name, episodes, anime_type):
+    def insert_data(self, conn, data):
         # Insert data into the table
         try:
-            url_name = str(anime_name).replace(' ', '_')
-            app = Info(url_name)
-            content_link, image_link = app.anime_info()
+            print("DB", data[0])
+            mal_data = data[0]
 
             insert_data_query = """
-                INSERT INTO Anime (AnimeName, Episodes, Type, Image, Content) VALUES (%s, %s, %s, %s, %s);
+                INSERT INTO public.mal_data (mal_id, english_title, japanese_title, episodes, types, image_url, page_url, score, synopsis) 
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);
             """
 
-            self.cur.execute(insert_data_query, (anime_name, episodes, anime_type, image_link, content_link))
+            self.cur.execute(insert_data_query, (mal_data["Anime_ID"], mal_data["English_Title"],
+                                                 mal_data["Japanese_Title"], mal_data["Episodes"],
+                                                 mal_data["Anime_Type"], mal_data["Anime_Image"],
+                                                 mal_data["Anime_URL"], mal_data["Anime_Score"],
+                                                 mal_data["Anime_Synopsis"]))
             conn.commit()
 
         except Exception as e:
@@ -75,7 +83,7 @@ class Anime:
     def retrieve_data(self):
         try:
             select_data_query = """
-                SELECT AnimeName, Episodes, Type, Image, Content FROM Anime ORDER BY AnimeName ASC;
+                SELECT * FROM public.mal_data ORDER BY english_title ASC;
             """
 
             self.cur.execute(select_data_query)
@@ -86,12 +94,17 @@ class Anime:
             rows = self.cur.fetchall()
 
             for row in rows:
+                print(row)
                 data = {
-                    "AnimeName": row[0],
-                    "Episodes": row[1],
-                    "Type": row[2],
-                    "Image": row[3],
-                    "Content": row[4]
+                    "English_Title": row[1],
+                    "Japanese_Title": row[2],
+                    "Anime_Type": row[4],
+                    "Episodes": row[3],
+                    "Anime_ID": row[0],
+                    "Anime_URL": row[6],
+                    "Anime_Image": row[5],
+                    "Anime_Score": row[7],
+                    "Anime_Synopsis": row[8]
                 }
                 fetch_data.append(data)
 
