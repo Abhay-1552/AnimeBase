@@ -3,6 +3,7 @@ from psycopg2 import sql
 from urllib.parse import urlparse
 from psycopg2 import extensions
 from content_scraping import Info
+from mal_api import MAL
 
 
 class AnimeDB:
