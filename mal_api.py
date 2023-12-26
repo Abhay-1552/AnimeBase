@@ -1,4 +1,5 @@
-from mal import AnimeSearch
+from mal import AnimeSearch, Anime
+from content_scraping import Info
 
 
 class MAL:
@@ -26,4 +27,9 @@ class MAL:
         self.anime_details.append(data)
 
         return self.anime_details
+
+    def comparison(self):
+        MAL.mal_api(self)
+
+        print("Hello")
 

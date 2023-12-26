@@ -34,11 +34,25 @@ class Info:
 
             soup = BeautifulSoup(response.content, 'html.parser')
 
-            main_content = soup.find('div', {'class': 'leftside'})
-            img_link = main_content.find('img').get('data-src')
+            link_content = soup.find('div', {'class': 'leftside'})
+            img_link = link_content.find('img').get('data-src')
 
-            return link, img_link
+            name_content = soup.find('div', {'itemprop': 'name'})
+            japanese_name = name_content.find('h1', {'class': 'title-name h1_bold_none'})
+            j_name = japanese_name.text.strip() if japanese_name else 'Japanese Name'
+
+            english_name = name_content.find('p', {'class': 'title-english title-inherit'})
+            e_name = english_name.text.strip() if english_name else 'English Name'
+
+            anime_id = link.split('/')[-2]
+
+            return link, img_link, j_name, e_name, anime_id
 
         except requests.exceptions.RequestException as e:
             print("Error fetching content:", e)
             return "Error fetching data."
+
+
+if __name__ == '__main__':
+    app = Info('another')
+    print(app.anime_info())
