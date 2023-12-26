@@ -27,7 +27,3 @@ class MAL:
 
         return self.anime_details
 
-
-if __name__ == '__main__':
-    app = MAL('Naruto')
-    print(app.mal_api())

@@ -1,10 +1,9 @@
 import psycopg2
-from psycopg2 import sql
 from urllib.parse import urlparse
 from psycopg2 import extensions
+from psycopg2 import sql
 from content_scraping import Info
 from mal_api import MAL
-
 
 class AnimeDB:
     def __init__(self, db_url):
@@ -35,11 +34,12 @@ class AnimeDB:
 class Anime:
     def __init__(self, conn):
         # Create a cursor object to execute SQL queries
+        self.conn = conn
         self.cur = conn.cursor()
 
         try:
             create_table_query = sql.SQL("""
-                CREATE TABLE IF NOT EXISTS public.mal_data (
+                CREATE TABLE IF NOT EXISTS mal_data (
                     mal_id INT8 NOT NULL,
                     english_title VARCHAR(300) NOT NULL,
                     japanese_title VARCHAR(300) NOT NULL,
@@ -47,9 +47,8 @@ class Anime:
                     type VARCHAR(10) NOT NULL,
                     image_url VARCHAR(600) NOT NULL,
                     page_url VARCHAR(600) NOT NULL,
-                    synopsis VARCHAR(2500) NULL,
-                    score INT8 NULL,
-                    CONSTRAINT mal_data_pkey PRIMARY KEY (mal_id ASC)
+                    synopsis VARCHAR(2500),
+                    score INT8
                 );
             """)
 
@@ -59,23 +58,22 @@ class Anime:
         except Exception as e:
             print("Error:", e)
 
-    def insert_data(self, conn, data):
+    def insert_data(self, data):
         # Insert data into the table
         try:
-            print("DB", data[0])
             mal_data = data[0]
 
             insert_data_query = """
-                INSERT INTO public.mal_data (mal_id, english_title, japanese_title, episodes, types, image_url, page_url, score, synopsis) 
+                INSERT INTO public.mal_data (mal_id, english_title, japanese_title, episodes, type, image_url, page_url, synopsis, score) 
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);
             """
 
             self.cur.execute(insert_data_query, (mal_data["Anime_ID"], mal_data["English_Title"],
                                                  mal_data["Japanese_Title"], mal_data["Episodes"],
                                                  mal_data["Anime_Type"], mal_data["Anime_Image"],
-                                                 mal_data["Anime_URL"], mal_data["Anime_Score"],
-                                                 mal_data["Anime_Synopsis"]))
-            conn.commit()
+                                                 mal_data["Anime_URL"], mal_data["Anime_Synopsis"],
+                                                 mal_data["Anime_Score"]))
+            self.conn.commit()
 
         except Exception as e:
             return f"Error: {e}"
@@ -94,7 +92,6 @@ class Anime:
             rows = self.cur.fetchall()
 
             for row in rows:
-                print(row)
                 data = {
                     "English_Title": row[1],
                     "Japanese_Title": row[2],
@@ -103,8 +100,8 @@ class Anime:
                     "Anime_ID": row[0],
                     "Anime_URL": row[6],
                     "Anime_Image": row[5],
-                    "Anime_Score": row[7],
-                    "Anime_Synopsis": row[8]
+                    "Anime_Score": row[8],
+                    "Anime_Synopsis": row[7]
                 }
                 fetch_data.append(data)
 

@@ -24,7 +24,6 @@ def index():
 @app.route("/retrieve_data")
 def retrieve_data():
     data_type = anime_instance.retrieve_data()
-    print("Retrieve", data_type)
     return render_template('watchlist.html', data_types=data_type)
 
 
@@ -37,7 +36,7 @@ def form_data():
         mal_data = mal.mal_api()
         print("Requested", mal_data)
 
-        anime_instance.insert_data(conn=anime_db.conn, data=mal_data)
+        anime_instance.insert_data(data=mal_data)
 
         return redirect(url_for('retrieve_data'))
     return '', 204
