@@ -5,3 +5,4 @@ beautifulsoup4~=4.12.2
 
 psycopg2~=2.9.9
 bs4~=0.0.1
+mal-api~=0.5.3

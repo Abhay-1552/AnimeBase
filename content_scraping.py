@@ -6,14 +6,14 @@ from mal_api import MAL
 class Info:
     def __init__(self, name):
         self.title = name
-        self.url_name = name.replace(' ', '_').replace(':', '').lower()
+        self.url_name = name.replace(' ', '_').replace(':', '').replace('?', '').lower()
 
         self.url = f'https://www.google.com/search?q={self.url_name}+myanimelist'
         self.header = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
         }
 
-    def anime_link(self):
+    def anime_data(self):
         try:
             response = requests.get(self.url, headers=self.header)
             response.raise_for_status()
@@ -28,7 +28,10 @@ class Info:
 
             name_id = [int(x) for x in content_link.split('/') if x.isnumeric()]
 
-            return content_link, e_name, name_id[0]
+            data = MAL(self.title, name_id[0])
+            mal_data = data.mal_search()
+
+            return mal_data
 
         except requests.exceptions.RequestException as e:
             print("Error fetching content:", e)
@@ -36,5 +39,5 @@ class Info:
 
 
 if __name__ == '__main__':
-    app = Info('Boruto: The Next Generation')
-    print(app.anime_link())
+    app = Info('My Happy Marriage')
+    print(app.anime_data())
