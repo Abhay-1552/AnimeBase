@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 from cockroachdb import Anime, AnimeDB
 from news_scraping import News
-from mal_api import MAL
+from content_scraping import Info
+
 
 app = Flask(__name__, template_folder='template', static_folder='static')
 
@@ -27,19 +28,19 @@ def retrieve_data():
     return render_template('watchlist.html', data_types=data_type)
 
 
-# @app.route("/form_data", methods=["POST"])
-# def form_data():
-#     if request.method == 'POST':
-#         anime_name = request.form.get('inputName')
-#
-#         mal = MAL(anime_name)
-#         mal_data = mal.mal_api()
-#         print("Requested", mal_data)
-#
-#         anime_instance.insert_data(data=mal_data)
-#
-#         return redirect(url_for('retrieve_data'))
-#     return '', 204
+@app.route("/form_data", methods=["POST"])
+def form_data():
+    if request.method == 'POST':
+        anime_name = request.form.get('inputName')
+
+        anime_info = Info(anime_name)
+        mal_data = anime_info.anime_data()
+        print("Requested", mal_data)
+
+        anime_instance.insert_data(data=mal_data)
+
+        return redirect(url_for('retrieve_data'))
+    return '', 204
 
 
 if __name__ == '__main__':
