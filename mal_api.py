@@ -1,35 +1,32 @@
 from mal import AnimeSearch, Anime
-from content_scraping import Info
 
 
 class MAL:
-    def __init__(self, name):
+    def __init__(self, name, mal_id):
         self.anime_name = name
+        self.mal_id = mal_id
         self.anime_details = []
 
-    def mal_api(self):
-        search = AnimeSearch(self.anime_name)
-
-        anime = search.results[0]
+    def mal_search(self):
+        search = Anime(self.mal_id)
 
         data = {
             "English_Title": self.anime_name,
-            "Japanese_Title": anime.title,
-            "Anime_Type": anime.type,
-            "Episodes": anime.episodes,
-            "Anime_ID": anime.mal_id,
-            "Anime_URL": anime.url,
-            "Anime_Image": anime.image_url,
-            "Anime_Score": anime.score,
-            "Anime_Synopsis": anime.synopsis
+            "Japanese_Title": search.title,
+            "Anime_Type": search.type,
+            "Episodes": search.episodes,
+            "Anime_ID": search.mal_id,
+            "Anime_URL": search.url,
+            "Anime_Image": search.image_url,
+            "Anime_Score": search.score,
+            "Anime_Synopsis": search.synopsis
         }
 
         self.anime_details.append(data)
 
         return self.anime_details
 
-    def comparison(self):
-        MAL.mal_api(self)
 
-        print("Hello")
-
+if __name__ == '__main__':
+    App = MAL('Another', 11111)
+    print(App.mal_search())
