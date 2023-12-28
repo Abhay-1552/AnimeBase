@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from cockroachdb import Anime, AnimeDB
 from news_scraping import News
-from content_scraping import Info
+from mal_api import MAL
 
 
 app = Flask(__name__, template_folder='template', static_folder='static')
@@ -32,9 +32,10 @@ def retrieve_data():
 def form_data():
     if request.method == 'POST':
         anime_name = request.form.get('inputName')
+        anime_id = request.form.get('malId')
 
-        anime_info = Info(anime_name)
-        mal_data = anime_info.anime_data()
+        anime_info = MAL(anime_name, anime_id)
+        mal_data = anime_info.mal_search()
         print("Requested", mal_data)
 
         anime_instance.insert_data(data=mal_data)

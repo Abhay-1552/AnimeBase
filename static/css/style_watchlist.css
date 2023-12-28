@@ -80,9 +80,15 @@ h2 {
     font-size: larger;
 }
 
+h4 {
+    color: #fff;
+    font-weight: 600;
+    font-size: medium;
+}
+
 p {
     color: #fff;
-    font-weight: 500;
+    font-weight: 400;
     font-size: medium;
 }
 

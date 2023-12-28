@@ -19,14 +19,8 @@ class MAL:
             "Anime_URL": search.url,
             "Anime_Image": search.image_url,
             "Anime_Score": search.score,
-            "Anime_Synopsis": search.synopsis
         }
 
         self.anime_details.append(data)
 
         return self.anime_details
-
-
-if __name__ == '__main__':
-    App = MAL('Naruto', 20)
-    print(App.mal_search())

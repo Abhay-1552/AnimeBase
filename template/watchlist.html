@@ -13,10 +13,6 @@
     <link rel="stylesheet" href="../static/css/style_watchlist.css">
 
     <style>
-        .form-control {
-            width: 500px;
-        }
-
         .circle-container {
             position: fixed;
             bottom: 80px;
@@ -46,8 +42,19 @@
             transition: opacity 0.3s ease-in-out;
         }
 
+        .message-link,
+        .message-link:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
         .circle-container:hover .message-box {
             opacity: 1;
+        }
+
+        .star {
+            width: 20px;
+            height: 20px;
         }
     </style>
 </head>
@@ -67,9 +74,6 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Anime</a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -87,9 +91,12 @@
             <form method="post" action="{{ url_for('form_data') }}" onsubmit="showPopup()">
                 <div class="form-row align-items-center">
                     <div class="col-auto">
-                        <label class="sr-only" for="inputName">Name:</label>
                         <input type="text" class="form-control mb-2" id="inputName" name="inputName"
-                            placeholder="Add Animes" required>
+                            placeholder="Add Anime Name" style="width: 500px;" required>
+                    </div>
+                    <div class="col-auto">
+                        <input type="number" class="form-control mb-2" id="malId" name="malId"
+                            placeholder="Enter MAL Id" oninput="this.value = Math.abs(this.value)" required>
                     </div>
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary mb-2">Submit</button>
@@ -101,7 +108,9 @@
             <a href="https://myanimelist.net/" target="_blank">
                 <img class="circle-image" src="../static/images/mal.png" alt="Circle Image">
             </a>
-            <div class="message-box">MyAnimeList</div>
+            <div class="message-box">
+                <a href="https://myanimelist.net/" class="message-link" target="_blank">MyAnimeList</a>
+            </div>
         </div>
     </section>
 
@@ -115,9 +124,15 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h2 class="card-title">{{ item.English_Title }}</h2>
-                        <p class="card-text">{{ item.Anime_Type }}, {{ item.Episodes }} Episodes</p>
-                        <p class="card-text"><small><a href="{{ item.Anime_URL }}" target="_blank">Read
-                                    more...</a></small></p>
+                        <h4 class="card-title">{{ item.Japanese_Title }}</h4>
+                        <p class="card-text" style="line-height: 25px;">{{ item.Anime_Type }}, {{ item.Episodes }} Episodes, {{
+                            item.Anime_Score }}<img src="../static/images/star.png" style="height: 25px; width: 25px; vertical-align: top;"
+                                alt="Rating"></p>
+                        <p class="card-text">
+                            <a href="{{ item.Anime_URL }}" target="_blank">
+                                <img src="../static/images/see.png" style="height: 50px; width: 50px;" alt="Read More">
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
