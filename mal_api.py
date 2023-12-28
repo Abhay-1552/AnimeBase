@@ -28,5 +28,5 @@ class MAL:
 
 
 if __name__ == '__main__':
-    App = MAL('Another', 11111)
+    App = MAL('Naruto', 20)
     print(App.mal_search())

@@ -25,7 +25,7 @@ class Info:
             main_content = soup.find('a', {'jsname': 'UWckNb'})
             content_link = main_content.get('href')
 
-            name_content = soup.find('div', {'itemprop': 'name'})
+            name_content = soup.find('div', {'class': 'h1-title'})
 
             japanese_name = name_content.find('h1', {'class': 'title-name h1_bold_none'})
             j_name = japanese_name.strong.get_text()
