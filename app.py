@@ -36,7 +36,6 @@ def form_data():
 
         anime_info = MAL(anime_name, anime_id)
         mal_data = anime_info.mal_search()
-        print("Requested", mal_data)
 
         anime_instance.insert_data(data=mal_data)
 
