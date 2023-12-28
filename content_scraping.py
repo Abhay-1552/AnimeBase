@@ -25,11 +25,13 @@ class Info:
             main_content = soup.find('a', {'jsname': 'UWckNb'})
             content_link = main_content.get('href')
 
-            english_name = main_content.find('p', {'class': 'title-english title-inherit'})
-            e_name = english_name.text.strip() if english_name else None
+            name_content = soup.find('div', {'itemprop': 'name'})
 
-            japanese_name = main_content.find('p', {'class': 'title-english title-inherit'})
-            j_name = japanese_name.text.strip() if japanese_name else None
+            japanese_name = name_content.find('h1', {'class': 'title-name h1_bold_none'})
+            j_name = japanese_name.strong.get_text()
+
+            english_name = name_content.find('p', {'class': 'title-english title-inherit'})
+            e_name = english_name.get_text() if english_name else self.name
 
             name_id = [int(x) for x in content_link.split('/') if x.isnumeric()]
 
