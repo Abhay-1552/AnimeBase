@@ -46,7 +46,7 @@ class Anime:
                     type VARCHAR(10) NOT NULL,
                     image_url VARCHAR(600) NOT NULL,
                     page_url VARCHAR(600) NOT NULL,
-                    score INT8
+                    score FLOAT
                 );
             """)
 

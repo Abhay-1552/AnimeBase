@@ -1,4 +1,4 @@
-from mal import AnimeSearch, Anime
+from mal import Anime
 
 
 class MAL:
