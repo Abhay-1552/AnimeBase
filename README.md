@@ -1,6 +1,6 @@
 # AnimeBase
 
-AnimeBase is a web application that allows users to store and manage a list of their watched animes. The project utilizes MongoDB Cloud for storage, Flask as the backend framework, and incorporates web scraping to fetch the latest anime news. Additionally, AnimeBase recommends popular anime titles for users to explore and provides links to well-known anime websites.
+AnimeBase is a web application that allows users to store and manage a list of their watched animes. The project utilizes CockroachDB for storage, Flask as the backend framework, and incorporates web scraping to fetch the latest anime news. Additionally, AnimeBase recommends popular anime titles for users to explore and provides links to well-known anime websites.
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@ Before you begin, ensure you have the following dependencies installed:
 
 - Python 3.x
 - Flask
-- MongoDB
+- CockroachDB
 - Beautifulsoup
 - (Optional) Virtual environment for Python
 
@@ -39,9 +39,9 @@ Before you begin, ensure you have the following dependencies installed:
    pip install -r requirements.txt
    ```
 
-3. Set up MongoDB Cloud:
+3. Set up CockroachDB Cloud:
 
-   - Create a MongoDB Cloud account: [MongoDB Cloud](https://cloud.mongodb.com/)
+   - Create a CockroachDB Cloud account: [CockroachDB Cloud](https://cockroachlabs.cloud/)
    - Create a cluster and obtain the connection string.
 
 4. Configure the application:
@@ -49,7 +49,7 @@ Before you begin, ensure you have the following dependencies installed:
    - Create a `.env` file in the project root and add the following:
 
      ```dotenv
-     MONGO_URI=<your-mongodb-connection-string>
+     COCKROACH_URI=<your-cockroachdb-connection-string>
      ```
 
 ## Usage
