@@ -15,6 +15,8 @@ db_url = "postgresql://Abhay:Lo4jQy5LkBDj33DUzqf2tQ@cloudy-tang-7295.8nk.cockroa
 anime_db = AnimeDB(db_url)
 anime_instance = Anime(anime_db.conn)
 
+allowedIPs = ['152:58:34:210', '192.168.196.150']
+
 
 @app.route("/")
 def index():
@@ -25,7 +27,13 @@ def index():
 @app.route("/retrieve_data")
 def retrieve_data():
     data_type = anime_instance.retrieve_data()
-    return render_template('watchlist.html', data_types=data_type)
+
+    user_ip = request.remote_addr
+
+    if user_ip in allowedIPs:
+        return render_template('watchlist.html', data_types=data_type, form_enabled=True)
+    else:
+        return render_template('watchlist.html', data_types=data_type, IP=user_ip, form_enabled=False)
 
 
 @app.route("/form_data", methods=["POST"])

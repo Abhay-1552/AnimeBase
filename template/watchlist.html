@@ -12,51 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="../static/css/style_watchlist.css">
 
-    <style>
-        .circle-container {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-        }
-
-        .circle-image {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .message-box {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .message-link,
-        .message-link:hover {
-            color: #ffffff;
-            text-decoration: none;
-        }
-
-        .circle-container:hover .message-box {
-            opacity: 1;
-        }
-
-        .star {
-            width: 20px;
-            height: 20px;
-        }
-    </style>
 </head>
 
 <body>
@@ -88,6 +43,7 @@
 
     <section>
         <div>
+            {% if form_enabled %}
             <form method="post" action="{{ url_for('form_data') }}" onsubmit="showPopup()">
                 <div class="form-row align-items-center">
                     <div class="col-auto">
@@ -103,6 +59,9 @@
                     </div>
                 </div>
             </form>
+            {% else %}
+            <p>Access denied. Your IP address {{ IP }} is not allowed.</p>
+            {% endif %}
         </div>
         <div class="circle-container">
             <a href="https://myanimelist.net/" target="_blank">
@@ -125,9 +84,10 @@
                     <div class="card-body">
                         <h2 class="card-title">{{ item.English_Title }}</h2>
                         <h4 class="card-title">{{ item.Japanese_Title }}</h4>
-                        <p class="card-text" style="line-height: 25px;">{{ item.Anime_Type }}, {{ item.Episodes }} Episodes, {{
-                            item.Anime_Score }}<img src="../static/images/star.png" style="height: 25px; width: 25px; vertical-align: top;"
-                                alt="Rating"></p>
+                        <p class="card-text" style="line-height: 25px;">{{ item.Anime_Type }}, {{ item.Episodes }}
+                            Episodes, {{
+                            item.Anime_Score }}<img src="../static/images/star.png"
+                                style="height: 25px; width: 25px; vertical-align: top;" alt="Rating"></p>
                         <p class="card-text">
                             <a href="{{ item.Anime_URL }}" target="_blank">
                                 <img src="../static/images/see.png" style="height: 50px; width: 50px;" alt="Read More">
