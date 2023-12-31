@@ -10,12 +10,12 @@ app = Flask(__name__, template_folder='template', static_folder='static')
 anime_app = News()
 
 # Anime database Instance
-db_url = "YOUR_COCKROACHDB_CONNECT_URL"
+db_url = "postgresql://Abhay:Lo4jQy5LkBDj33DUzqf2tQ@cloudy-tang-7295.8nk.cockroachlabs.cloud:26257/AnimeBase?sslmode=verify-full"
 
 anime_db = AnimeDB(db_url)
 anime_instance = Anime(anime_db.conn)
 
-allowedIPs = ['IP_ADDRESS-1', 'IP_ADDRESS-2', ...]
+allowedIPs = ['152:58:34:210', '192.168.196.150']
 
 
 @app.route("/")
