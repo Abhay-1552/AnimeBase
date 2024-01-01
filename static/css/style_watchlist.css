@@ -64,9 +64,10 @@ section {
 }
 
 .card img {
-    width: 150px;
-    height: 200px;
+    width: 170px;
+    height: 220px;
     border-radius: 8px 0px 0px 8px;
+    object-fit: fill;
 }
 
 .card-content {

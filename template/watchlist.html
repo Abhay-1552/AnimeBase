@@ -63,12 +63,59 @@
             <p>Access denied. Your IP address {{ IP }} is not allowed.</p>
             {% endif %}
         </div>
-        <div class="circle-container">
-            <a href="https://myanimelist.net/" target="_blank">
-                <img class="circle-image" src="../static/images/mal.png" alt="Circle Image">
-            </a>
-            <div class="message-box">
-                <a href="https://myanimelist.net/" class="message-link" target="_blank">MyAnimeList</a>
+
+        <div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModal">
+                Filter
+            </button>
+
+            <!-- Filter Modal -->
+            <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="filterModalLabel">Filter Options</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="list-group list-group-checkable d-grid gap-2 border-0">
+                                <input class="list-group-item-check pe-none" type="radio"
+                                    name="listGroupCheckableRadios" id="listGroupCheckableRadios1" value="" checked="">
+                                <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios1">
+                                    First radio
+                                    <span class="d-block small opacity-50">With support text underneath to add more
+                                        detail</span>
+                                </label>
+
+                                <input class="list-group-item-check pe-none" type="radio"
+                                    name="listGroupCheckableRadios" id="listGroupCheckableRadios2" value="">
+                                <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios2">
+                                    Second radio
+                                    <span class="d-block small opacity-50">Some other text goes here</span>
+                                </label>
+
+                                <input class="list-group-item-check pe-none" type="radio"
+                                    name="listGroupCheckableRadios" id="listGroupCheckableRadios3" value="">
+                                <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios3">
+                                    Third radio
+                                    <span class="d-block small opacity-50">And we end with another snippet of
+                                        text</span>
+                                </label>
+
+                                <input class="list-group-item-check pe-none" type="radio"
+                                    name="listGroupCheckableRadios" id="listGroupCheckableRadios4" value="" disabled="">
+                                <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios4">
+                                    Fourth disabled radio
+                                    <span class="d-block small opacity-50">This option is disabled</span>
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -100,6 +147,17 @@
         {% endfor %}
     </section>
 
+    <section>
+        <div class="circle-container">
+            <a href="https://myanimelist.net/" target="_blank">
+                <img class="circle-image" src="../static/images/mal.png" alt="Circle Image">
+            </a>
+            <div class="message-box">
+                <a href="https://myanimelist.net/" class="message-link" target="_blank">MyAnimeList</a>
+            </div>
+        </div>
+    </section>
+
     <footer class="mt-5">
         <p>&copy; 2023 Anime World. All rights reserved.</p>
     </footer>
@@ -107,12 +165,16 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 
     <script>
         function showPopup() {
             var anime_name = document.getElementById('inputName').value;
 
-            alert("Data Saved: Anime name " + anime_name + " added to your watchlist.");
+            alert("Data Saved: " + anime_name + " added to your watchlist.");
 
             return true;
         }
