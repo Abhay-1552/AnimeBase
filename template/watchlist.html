@@ -42,81 +42,90 @@
     </section>
 
     <section>
-        <div>
-            {% if form_enabled %}
-            <form method="post" action="{{ url_for('form_data') }}" onsubmit="showPopup()">
-                <div class="form-row align-items-center">
-                    <div class="col-auto">
-                        <input type="text" class="form-control mb-2" id="inputName" name="inputName"
-                            placeholder="Add Anime Name" style="width: 500px;" required>
-                    </div>
-                    <div class="col-auto">
-                        <input type="number" class="form-control mb-2" id="malId" name="malId"
-                            placeholder="Enter MAL Id" oninput="this.value = Math.abs(this.value)" required>
-                    </div>
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-primary mb-2">Submit</button>
-                    </div>
-                </div>
-            </form>
-            {% else %}
-            <p>Access denied. Your IP address {{ IP }} is not allowed.</p>
-            {% endif %}
-        </div>
-
-        <div>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filterModal">
-                Filter
-            </button>
-
-            <!-- Filter Modal -->
-            <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="filterModalLabel">Filter Options</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+        <div class="row">
+            <div>
+                {% if form_enabled %}
+                <form method="post" action="{{ url_for('form_data') }}" onsubmit="showPopup()">
+                    <div class="form-row align-items-center">
+                        <div class="col-auto">
+                            <input type="text" class="form-control mb-2" id="inputName" name="inputName"
+                                placeholder="Add Anime Name" style="width: 500px;" required>
                         </div>
-                        <div class="modal-body">
-                            <div class="list-group list-group-checkable d-grid gap-2 border-0">
-                                <input class="list-group-item-check pe-none" type="radio"
-                                    name="listGroupCheckableRadios" id="listGroupCheckableRadios1" value="" checked="">
-                                <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios1">
-                                    First radio
-                                    <span class="d-block small opacity-50">With support text underneath to add more
-                                        detail</span>
-                                </label>
-
-                                <input class="list-group-item-check pe-none" type="radio"
-                                    name="listGroupCheckableRadios" id="listGroupCheckableRadios2" value="">
-                                <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios2">
-                                    Second radio
-                                    <span class="d-block small opacity-50">Some other text goes here</span>
-                                </label>
-
-                                <input class="list-group-item-check pe-none" type="radio"
-                                    name="listGroupCheckableRadios" id="listGroupCheckableRadios3" value="">
-                                <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios3">
-                                    Third radio
-                                    <span class="d-block small opacity-50">And we end with another snippet of
-                                        text</span>
-                                </label>
-
-                                <input class="list-group-item-check pe-none" type="radio"
-                                    name="listGroupCheckableRadios" id="listGroupCheckableRadios4" value="" disabled="">
-                                <label class="list-group-item rounded-3 py-3" for="listGroupCheckableRadios4">
-                                    Fourth disabled radio
-                                    <span class="d-block small opacity-50">This option is disabled</span>
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+                        <div class="col-auto">
+                            <input type="number" class="form-control mb-2" id="malId" name="malId"
+                                placeholder="Enter MAL Id" oninput="this.value = Math.abs(this.value)" required>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-2">Submit</button>
                         </div>
                     </div>
-                </div>
+                </form>
+                {% else %}
+                <p style="margin-top: 5px;">Access denied. Your IP address {{ IP }} is not allowed.</p>
+                {% endif %}
             </div>
+
+            <div style="margin-left: 10px;">
+                <button type="button" class="btn btn-primary rounded-pill" data-toggle="modal"
+                    data-target="#filterModal" style="background-color: #146c43; border-color: #146c43;">
+                    Filter
+                </button>
+
+                <form method="post" action="{{ url_for('radio_data') }}">
+                    <div class="modal fade" id="filterModal" tabindex="-1" role="dialog"
+                        aria-labelledby="filterModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="filterModalLabel">Filter Options</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="radio1" name="customRadio"
+                                                class="custom-control-input" value="score_hl">
+                                            <label class="custom-control-label radio-label" for="radio1">Score - High to
+                                                Low</label>
+                                        </div>
+
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="radio2" name="customRadio"
+                                                class="custom-control-input" value="score_lh">
+                                            <label class="custom-control-label radio-label" for="radio2">Score - Low to
+                                                High</label>
+                                        </div>
+
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="radio3" name="customRadio"
+                                                class="custom-control-input" value="movie">
+                                            <label class="custom-control-label radio-label" for="radio3">Movie</label>
+                                        </div>
+
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="radio4" name="customRadio"
+                                                class="custom-control-input" value="tv">
+                                            <label class="custom-control-label radio-label" for="radio4">TV</label>
+                                        </div>
+
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="radio5" name="customRadio"
+                                                class="custom-control-input" value="ona">
+                                            <label class="custom-control-label radio-label" for="radio5">ONA</label>
+                                        </div>                                       
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mt-3"
+                                        style="border-radius: 10px;">Apply
+                                        Filter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </section>
 

@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from cockroachdb import Anime, AnimeDB
 from news_scraping import News
 from mal_api import MAL
+import credentials
 
 
 app = Flask(__name__, template_folder='template', static_folder='static')
@@ -10,12 +11,12 @@ app = Flask(__name__, template_folder='template', static_folder='static')
 anime_app = News()
 
 # Anime database Instance
-db_url = "postgresql://Abhay:Lo4jQy5LkBDj33DUzqf2tQ@cloudy-tang-7295.8nk.cockroachlabs.cloud:26257/AnimeBase?sslmode=verify-full"
+db_url = credentials.db_url
 
 anime_db = AnimeDB(db_url)
 anime_instance = Anime(anime_db.conn)
 
-allowedIPs = ['152:58:34:210', '192.168.196.150']
+allowedIPs = credentials.allowedIPs
 
 
 @app.route("/")
@@ -46,6 +47,16 @@ def form_data():
         mal_data = anime_info.mal_search()
 
         anime_instance.insert_data(data=mal_data)
+
+        return redirect(url_for('retrieve_data'))
+    return '', 204
+
+
+@app.route("/radio_data", methods=["POST"])
+def radio_data():
+    if request.method == "POST":
+        filter_option = request.form.get('customRadio')
+        print(filter_option)
 
         return redirect(url_for('retrieve_data'))
     return '', 204
