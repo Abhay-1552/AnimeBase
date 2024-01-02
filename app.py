@@ -2,8 +2,11 @@ from flask import Flask, render_template, request, redirect, url_for
 from cockroachdb import Anime, AnimeDB
 from news_scraping import News
 from mal_api import MAL
-import credentials
+from dotenv import load_dotenv
+import os
 
+
+load_dotenv('.env')
 
 app = Flask(__name__, template_folder='template', static_folder='static')
 
@@ -11,12 +14,13 @@ app = Flask(__name__, template_folder='template', static_folder='static')
 anime_app = News()
 
 # Anime database Instance
-db_url = credentials.db_url
+db_url = os.getenv('db_url')
 
 anime_db = AnimeDB(db_url)
 anime_instance = Anime(anime_db.conn)
 
-allowedIPs = credentials.allowedIPs
+# IP addresses
+allowedIPs = os.getenv('allowedIPs')
 
 
 @app.route("/")
