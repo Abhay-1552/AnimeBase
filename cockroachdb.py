@@ -109,25 +109,3 @@ class Anime:
     def close_cursor(self):
         if hasattr(self, 'cur') and self.cur is not None:
             self.cur.close()
-
-
-class Filter:
-    def __init__(self, conn):
-        # Create a cursor object to execute SQL queries
-        self.conn = conn
-        self.cur = conn.cursor()
-
-    def ascending(self):
-        print('ascending')
-
-    def descending(self):
-        print('ascending')
-
-    def types(self):
-        print('ascending')
-
-    def score_hl(self):
-        print('ascending')
-
-    def score_lh(self):
-        print('ascending')

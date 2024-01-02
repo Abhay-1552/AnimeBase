@@ -29,6 +29,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home</a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://myanimelist.net/" target="_blank">MyAnimeList</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -64,107 +67,32 @@
                 <p style="margin-top: 5px;">Access denied. Your IP address {{ IP }} is not allowed.</p>
                 {% endif %}
             </div>
-
-            <div style="margin-left: 10px;">
-                <button type="button" class="btn btn-primary rounded-pill" data-toggle="modal"
-                    data-target="#filterModal" style="background-color: #146c43; border-color: #146c43;">
-                    Filter
-                </button>
-
-                <form method="post" action="{{ url_for('radio_data') }}">
-                    <div class="modal fade" id="filterModal" tabindex="-1" role="dialog"
-                        aria-labelledby="filterModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="filterModalLabel">Filter Options</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div>
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="radio1" name="customRadio"
-                                                class="custom-control-input" value="score_hl">
-                                            <label class="custom-control-label radio-label" for="radio1">Score - High to
-                                                Low</label>
-                                        </div>
-
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="radio2" name="customRadio"
-                                                class="custom-control-input" value="score_lh">
-                                            <label class="custom-control-label radio-label" for="radio2">Score - Low to
-                                                High</label>
-                                        </div>
-
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="radio3" name="customRadio"
-                                                class="custom-control-input" value="movie">
-                                            <label class="custom-control-label radio-label" for="radio3">Movie</label>
-                                        </div>
-
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="radio4" name="customRadio"
-                                                class="custom-control-input" value="tv">
-                                            <label class="custom-control-label radio-label" for="radio4">TV</label>
-                                        </div>
-
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="radio5" name="customRadio"
-                                                class="custom-control-input" value="ona">
-                                            <label class="custom-control-label radio-label" for="radio5">ONA</label>
-                                        </div>                                       
-                                    </div>
-                                    <button type="submit" class="btn btn-primary mt-3"
-                                        style="border-radius: 10px;">Apply
-                                        Filter</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
         </div>
     </section>
 
     <section>
         {% for item in data_types %}
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                    <img src="{{ item.Anime_Image }}" class="card-img" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h2 class="card-title">{{ item.English_Title }}</h2>
-                        <h4 class="card-title">{{ item.Japanese_Title }}</h4>
-                        <p class="card-text" style="line-height: 25px;">{{ item.Anime_Type }}, {{ item.Episodes }}
-                            Episodes, {{
-                            item.Anime_Score }}<img src="../static/images/star.png"
-                                style="height: 25px; width: 25px; vertical-align: top;" alt="Rating"></p>
-                        <p class="card-text">
-                            <a href="{{ item.Anime_URL }}" target="_blank">
-                                <img src="../static/images/see.png" style="height: 50px; width: 50px;" alt="Read More">
-                            </a>
-                        </p>
-                    </div>
-                </div>
+        <div class="card border-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-transparent border-dark card-content">
+                <img src="{{ item.Anime_Image }}" alt="Image">
+            </div>
+            <div class="card-body text-dark card-content">
+                <h5 class="card-title">{{ item.English_Title }}</h5>
+                <h6 class="card-text">{{ item.Japanese_Title }}</h6>
+            </div>
+            <div class="card-footer bg-transparent border-dark card-content">
+                <p class="card-text" style="line-height: 25px;">{{ item.Anime_Type }}, {{ item.Episodes }}
+                    Episodes, {{
+                    item.Anime_Score }}<img src="../static/images/star.png"
+                        style="height: 25px; width: 25px; vertical-align: top;" alt="Rating"></p>
+                <p class="card-text">
+                    <a href="{{ item.Anime_URL }}" target="_blank">
+                        <img src="../static/images/see.png" style="height: 50px; width: 50px;" alt="Read More">
+                    </a>
+                </p>
             </div>
         </div>
         {% endfor %}
-    </section>
-
-    <section>
-        <div class="circle-container">
-            <a href="https://myanimelist.net/" target="_blank">
-                <img class="circle-image" src="../static/images/mal.png" alt="Circle Image">
-            </a>
-            <div class="message-box">
-                <a href="https://myanimelist.net/" class="message-link" target="_blank">MyAnimeList</a>
-            </div>
-        </div>
     </section>
 
     <footer class="mt-5">
@@ -174,10 +102,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
 
     <script>
         function showPopup() {

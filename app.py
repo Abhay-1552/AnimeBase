@@ -56,15 +56,5 @@ def form_data():
     return '', 204
 
 
-@app.route("/radio_data", methods=["POST"])
-def radio_data():
-    if request.method == "POST":
-        filter_option = request.form.get('customRadio')
-        print(filter_option)
-
-        return redirect(url_for('retrieve_data'))
-    return '', 204
-
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
