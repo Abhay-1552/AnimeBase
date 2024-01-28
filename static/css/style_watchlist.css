@@ -1,6 +1,5 @@
 body {
     background-color: #2B2B28;
-    margin-bottom: 90px;
     margin-top: 90px;
 }
 
@@ -24,7 +23,6 @@ footer {
     padding: 10px 0;
     text-align: center;
     bottom: 0;
-    position: fixed;
     width: 100%;
     z-index: 1000;
 }

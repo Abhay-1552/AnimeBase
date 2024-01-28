@@ -72,7 +72,7 @@
 
     <section>
         {% for item in data_types %}
-        <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card border-dark mb-3 valid_count" style="max-width: 18rem;">
             <div class="card-header bg-transparent border-dark card-content">
                 <img src="{{ item.Anime_Image }}" alt="Image">
             </div>
@@ -102,15 +102,17 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../static/js/count.js"></script>
 
     <script>
         function showPopup() {
             var anime_name = document.getElementById('inputName').value;
 
-            alert("Data Saved: " + anime_name + " added to your watchlist.");
-
+            alert("Adding " + anime_name + " to your watchlist.");
             return true;
         }
+
+        countAnime();
     </script>
 
 </body>

@@ -2,6 +2,8 @@ import psycopg2
 from urllib.parse import urlparse
 from psycopg2 import extensions
 from psycopg2 import sql
+import os
+from dotenv import load_dotenv
 
 
 class AnimeDB:
@@ -61,16 +63,17 @@ class Anime:
         try:
             mal_data = data[0]
 
-            insert_data_query = """
-                INSERT INTO public.mal_data (mal_id, english_title, japanese_title, episodes, type, image_url, page_url, score) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
-            """
+            flag = Anime.cross_check_values(self, mal_data["Anime_ID"])
 
-            self.cur.execute(insert_data_query, (mal_data["Anime_ID"], mal_data["English_Title"],
-                                                 mal_data["Japanese_Title"], mal_data["Episodes"],
-                                                 mal_data["Anime_Type"], mal_data["Anime_Image"],
-                                                 mal_data["Anime_URL"], mal_data["Anime_Score"]))
-            self.conn.commit()
+            if flag == 0:
+                insert_data_query = """INSERT INTO public.mal_data (mal_id, english_title, japanese_title, episodes, 
+                type, image_url, page_url, score) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"""
+
+                self.cur.execute(insert_data_query, (mal_data["Anime_ID"], mal_data["English_Title"],
+                                                     mal_data["Japanese_Title"], mal_data["Episodes"],
+                                                     mal_data["Anime_Type"], mal_data["Anime_Image"],
+                                                     mal_data["Anime_URL"], mal_data["Anime_Score"]))
+                self.conn.commit()
 
         except Exception as e:
             return f"Error: {e}"
@@ -102,6 +105,23 @@ class Anime:
                 fetch_data.append(data)
 
             return fetch_data
+
+        except Exception as e:
+            return f"Error: {e}"
+
+    def cross_check_values(self, mal_id):
+        try:
+            select_data_query = f"""
+                SELECT * FROM public.mal_data WHERE mal_id = {mal_id};
+            """
+
+            self.cur.execute(select_data_query)
+
+            flag = 0
+            if self.cur.fetchone():
+                flag += 1
+
+            return flag
 
         except Exception as e:
             return f"Error: {e}"
