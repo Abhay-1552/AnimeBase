@@ -11,98 +11,82 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="../static/css/style_watchlist.css">
-
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark animated fadeInUp">
-        <a class="navbar-brand">
-            <img src="../static/images/otaku.png" alt="Icon" style="margin-right: 5px;">
-            AnimeBase
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="https://myanimelist.net/" target="_blank">MyAnimeList</a>
-                </li>
-            </ul>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="../static/images/otaku.png" alt="Icon" style="margin-right: 5px;">
+                AnimeCloud
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://myanimelist.net/" target="_blank">MyAnimeList</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <section class="mt-5">
-        <div class="title text-center">
-            <h1
-                style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
-                SENPAI'S SANCTUARY</h1>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <h1>Welcome to SENPAI'S SANCTUARY</h1>
+                    <p>Your Ultimate Anime Destination</p>
+                    {% if form_enabled %}
+                    <form method="post" action="{{ url_for('form_data') }}" onsubmit="showPopup()">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="inputName" name="inputName"
+                                placeholder="Enter Anime Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="malId" name="malId" placeholder="Enter Anime ID"
+                                oninput="this.value = Math.abs(this.value)" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    {% else %}
+                    <img src="../static/images/error.png" alt="ERROR!" style="height: 82px; width: 82px;">
+                    <p>Access denied. Your IP address {{ IP }} has limited rights.</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </section>
 
-    <section>
-        <div class="row">
-            <div>
-                {% if form_enabled %}
-                <form method="post" action="{{ url_for('form_data') }}" onsubmit="showPopup()">
-                    <div class="form-row align-items-center">
-                        <div class="col-auto">
-                            <input type="text" class="form-control mb-2" id="inputName" name="inputName"
-                                placeholder="Add Anime Name" style="width: 500px;" required>
-                        </div>
-                        <div class="col-auto">
-                            <input type="number" class="form-control mb-2" id="malId" name="malId"
-                                placeholder="Enter MAL Id" oninput="this.value = Math.abs(this.value)" required>
-                        </div>
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary mb-2">Submit</button>
-                        </div>
-                    </div>
-                </form>
-                {% else %}
-                <p style="margin-top: 5px;">Access denied. Your IP address {{ IP }} is not allowed.</p>
-                {% endif %}
-            </div>
-        </div>
+    <!-- Additional Content -->
+    <section class="additional-content">
         <div class="container item-counts">
-            <div class="row">
-                <div class="col">
-                    <div class="box">
-                        <h5>TV</h5>
-                        <p>123</p>
+            <h3 class="title text-center">Anime Counts</h3>
+            <div class="container item-counts">
+                <div class="row">
+                    {% for item in anime_count %}
+                    <div class="col">
+                        <div class="box">
+                            <h5>{{ item.Anime_Type }}</h5>
+                            <p>{{ item.Count }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="box">
-                        <h5>OVA</h5>
-                        <p>456</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="box">
-                        <h5>TV Special</h5>
-                        <p>789</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="box">
-                        <h5>Movie</h5>
-                        <p>102</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="box">
-                        <h5>Special</h5>
-                        <p>135</p>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </section>
+    <!-- End Additional Content -->
 
     <section>
         {% for item in data_types %}
@@ -134,7 +118,7 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../static/js/count.js"></script>
 
@@ -148,7 +132,6 @@
 
         countAnime();
     </script>
-
 </body>
 
 </html>

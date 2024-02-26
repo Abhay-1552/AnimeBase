@@ -32,13 +32,14 @@ def index():
 @app.route("/retrieve_data")
 def retrieve_data():
     data_type = anime_instance.retrieve_data()
+    anime_count = anime_instance.types_of_anime()
 
     user_ip = request.remote_addr
 
     if user_ip in allowedIPs:
-        return render_template('watchlist.html', data_types=data_type, form_enabled=True)
+        return render_template('watchlist.html', data_types=data_type, anime_count=anime_count, form_enabled=True)
     else:
-        return render_template('watchlist.html', data_types=data_type, IP=user_ip, form_enabled=False)
+        return render_template('watchlist.html', data_types=data_type, IP=user_ip, anime_count=anime_count, form_enabled=False)
 
 
 @app.route("/form_data", methods=["POST"])

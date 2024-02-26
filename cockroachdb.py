@@ -126,6 +126,31 @@ class Anime:
         except Exception as e:
             return f"Error: {e}"
 
+    def types_of_anime(self):
+        try:
+            select_data_query = """
+                SELECT type, COUNT(type) FROM public.mal_data GROUP BY type;
+            """
+
+            self.cur.execute(select_data_query)
+
+            fetch_data = []
+
+            # Fetch all rows
+            rows = self.cur.fetchall()
+
+            for row in rows:
+                data = {
+                    "Anime_Type": row[0],
+                    "Count": row[1],
+                }
+                fetch_data.append(data)
+
+            return fetch_data
+
+        except Exception as e:
+            return f"Error: {e}"
+
     def close_cursor(self):
         if hasattr(self, 'cur') and self.cur is not None:
             self.cur.close()
