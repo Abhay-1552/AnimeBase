@@ -118,3 +118,35 @@ a:hover {
 .border-dark {
     border: 1px solid #000000;
 }
+
+
+/* Item counts */
+.box {
+    width: 100px;
+    height: 100px;
+    margin: 20px 10px 20px 10px;
+    padding: 10px 0 20px 0;
+    border: 2px solid #ccc;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.box h5 {
+    font-size: 16px;
+    color: #ffdd95;
+}
+
+.box p {
+    font-size: 30px;
+    color: white;
+}
+
+.item-counts .row {
+    display: flex;
+    justify-content: center;
+}
+
+.item-counts .col {
+    display: contents;
+    justify-content: center;
+}
