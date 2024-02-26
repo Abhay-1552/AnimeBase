@@ -2,8 +2,6 @@ import psycopg2
 from urllib.parse import urlparse
 from psycopg2 import extensions
 from psycopg2 import sql
-import os
-from dotenv import load_dotenv
 
 
 class AnimeDB:
