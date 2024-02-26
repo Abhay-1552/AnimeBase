@@ -1,5 +1,7 @@
 # AnimeBase
 
+![Anime Banner](https://github.com/Abhay-1552/AnimeBase/blob/main/static/images/banner.jpg)
+
 AnimeBase is a web application that allows users to store and manage a list of their watched animes. The project utilizes CockroachDB for storage, Flask as the backend framework, and incorporates web scraping to fetch the latest anime news. Additionally, AnimeBase recommends popular anime titles for users to explore and provides links to well-known anime websites.
 
 ## Table of Contents
