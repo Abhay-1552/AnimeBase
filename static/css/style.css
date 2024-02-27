@@ -2,6 +2,21 @@ body {
     background-color: #2B2B28;
 }
 
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+/* Navbar Styles */
 .navbar {
     background-color: #343a40;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);

@@ -4,6 +4,21 @@ body {
     color: #fff;
 }
 
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+/* Navbar Styles */
 .navbar {
     background-color: #343a40 !important;
 }
@@ -12,6 +27,7 @@ body {
     color: #fff !important;
 }
 
+/* Hero Section */
 .hero-section {
     background-color: #333;
     color: #fff;
