@@ -51,6 +51,8 @@
 		</div>
 	</section>
 
+	<hr class="animated">
+
 	<!-- About Section -->
 	<section id="about" class="container mt-5 animated fadeInUp">
 		<div class="row">
@@ -71,6 +73,8 @@
 			</div>
 		</div>
 	</section>
+
+	<hr class="animated">
 
 	<!-- Where to Watch Section -->
 	<section id="watchSection" class="container mt-5 animated fadeInUp">
@@ -112,21 +116,20 @@
 		</div>
 	</section>
 
+	<hr class="animated">
+
 	<!-- Small News Card Section -->
 	<section id="smallNewsCard" class="container mt-5 animated fadeInUp">
 		<h2 class="mb-4">Anime Bulletin</h2>
-		<div class="card-deck" style="margin-bottom: 20px;">
+		<div class="news-container">
 			{% for news_item in data %}
-			<div class="card card-anime">
-				<img src="{{ news_item['image_url'] }}" class="card-img-top card-image" alt="News Image">
-				<div class="card-body">
-					<h6 class="card-title">{{ news_item.title }}</h6>
-					<p class="card-text" style="color: #ffffff;">{{ news_item.date }} </p>
+			<div class="news-item">
+				<img src="{{ news_item['image_url'] }}" alt="News Image">
+				<div>
+					<p>{{ news_item.title }}</p>
+					<p class="time">Published: {{ news_item.date }}</p>
 				</div>
 			</div>
-			{% if loop.index % 5 == 0 %}
-		</div>
-		<div class="card-deck">{% endif %}
 			{% endfor %}
 		</div>
 	</section>
