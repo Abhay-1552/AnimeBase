@@ -4,13 +4,11 @@ from news_scraping import News
 from mal_api import MAL
 from dotenv import load_dotenv
 import os
-import webview
 
 
 load_dotenv('.env')
 
 app = Flask(__name__, template_folder='template', static_folder='static')
-window = webview.create_window('AnimeBase', app, text_select=True, maximized=True)
 
 # Anime news instance
 anime_app = News()
@@ -60,5 +58,4 @@ def form_data():
 
 
 if __name__ == '__main__':
-    webview.start(ssl=True, http_port=5000)
-    # app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True, )
